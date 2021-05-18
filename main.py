@@ -12,6 +12,18 @@ class QuizStarter: # Class for the UI, the main menu and username
         # Main header
         self.heading_label = Label(self.quiz_frame, text="Lorem ipsum dolor sit amet",font=("Tw Cen MT","18","bold"),bg=background_color)
         self.heading_label.grid(row=0, padx=100)
+
+        # Username Label
+        self.user_label = Label(self.quiz_frame, text="Lorem ipsum dolor sit amet", font=("Tw Cen MT","16"),bg=background_color)
+        self.user_label.grid(row=1,padx=100)
+        
+        #entry box
+        self.entry_box=Entry(self.quiz_frame)
+        self.entry_box.grid(row=2,padx=100, pady=40)
+      
+        #continue button
+        self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"), bg="orange")
+        self.continue_button.grid(row=3,  padx=100, pady=20)  
                   
 if __name__ == "__main__":
   root = Tk()
