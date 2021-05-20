@@ -1,9 +1,13 @@
 from tkinter import *
 
+background_color = "gray13"
+foreground_color = "floralwhite"
+names_list = [] 
+
 class QuizStarter: # Class for the UI, the main menu and username 
     def __init__(self, parent):
-        background_color = "gray13" 
-        foreground_color = "floralwhite"
+        # background_color = "gray13" 
+        # foreground_color = "floralwhite"
         # Frame of the UI
         self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
         # Geometry and placement of the UI
@@ -23,12 +27,31 @@ class QuizStarter: # Class for the UI, the main menu and username
         self.entry_box.grid(row=2,padx=100, pady=20)
       
         #continue button
-        self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"), bg="mediumseagreen")
-        self.continue_button.grid(row=3,  padx=50, pady=20, sticky=W)  
+        self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"), bg="mediumseagreen", command=self.continue_process)
+        self.continue_button.grid(row=3,  padx=50, pady=30, sticky=E)  
+        self.continue_button.config(width = 8) # button same size as the exit button
 
         #Exit button 
         self.exit_button = Button(self.quiz_frame, text="Exit", font=("Helvetica", "13", "bold"), bg="mediumseagreen")
-        self.exit_button.grid(row=3, padx=50,pady=20, sticky=E)
+        self.exit_button.grid(row=3, padx=50 ,pady=30, sticky=W)
+        self.exit_button.config(width = 8) # make the button the same size as the continue button
+
+    def continue_process(self): 
+      name = self.entry_box.get()
+      names_list.append(name)
+      self.quiz_frame.destroy()
+      Selection(root)
+
+class Selection: # Class for the quiz selection interface
+  def __init__(self, parent): 
+    self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
+    # Geometry and placement of the UI
+    self.quiz_frame.grid()
+
+    self.heading_label = Label(self.quiz_frame, text="test", bg=background_color, fg=foreground_color)
+    self.heading_label.grid(row=0, pady=20, padx=100)
+
+
                   
 if __name__ == "__main__":
   root = Tk()
