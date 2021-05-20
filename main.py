@@ -19,7 +19,7 @@ class QuizStarter: # Class for the UI, the main menu and username
         self.heading_label.grid(row=0, padx=100)
 
         # Username Label
-        self.user_label = Label(self.quiz_frame, text="Enter your username", font=("Tw Cen MT","14"),bg=background_color, fg=foreground_color)
+        self.user_label = Label(self.quiz_frame, text="Enter your name:", font=("Tw Cen MT","14"),bg=background_color, fg=foreground_color)
         self.user_label.grid(row=1,pady=20,padx=100)
         
         #entry box
@@ -32,24 +32,24 @@ class QuizStarter: # Class for the UI, the main menu and username
         self.continue_button.config(width = 8) # button same size as the exit button
 
         #Exit button 
-        self.exit_button = Button(self.quiz_frame, text="Exit", font=("Helvetica", "13", "bold"), bg="mediumseagreen")
+        self.exit_button = Button(self.quiz_frame, text="Exit", font=("Helvetica", "13", "bold"), bg="indianred")
         self.exit_button.grid(row=3, padx=50 ,pady=30, sticky=W)
         self.exit_button.config(width = 8) # make the button the same size as the continue button
 
         #Error correction
-        self.error_label = Label(self.quiz_frame, text="", font=("Helvetica", "9","bold"), bg=background_color, fg=foreground_color)
+        self.error_label = Label(self.quiz_frame, text="", font=("Helvetica", "9","bold"), bg=background_color, fg="indianred")
         self.error_label.grid(row=4,padx=20,pady=10)
    
     def continue_process(self): 
       name = self.entry_box.get()
 
-      if str.isalpha(name) == True and int(len(name)) <= 10: 
+      if str.isalpha(name) == True and int(len(name)) <= 15: 
         names_list.append(name)
         self.quiz_frame.destroy()
         Selection(root)
       else:
          self.error_label.configure(text = "")
-         self.error_label.configure(text = "We only accept names in the alphabet and under 10 letters!")
+         self.error_label.configure(text = "We only accept names in the alphabet and under 15 letters!")
     
 
 
