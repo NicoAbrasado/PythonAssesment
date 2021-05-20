@@ -36,12 +36,24 @@ class QuizStarter: # Class for the UI, the main menu and username
         self.exit_button.grid(row=3, padx=50 ,pady=30, sticky=W)
         self.exit_button.config(width = 8) # make the button the same size as the continue button
 
+        #Error correction
+        self.error_label = Label(self.quiz_frame, text="", font=("Helvetica", "9","bold"), bg=background_color, fg=foreground_color)
+        self.error_label.grid(row=4,padx=20,pady=10)
+   
     def continue_process(self): 
       name = self.entry_box.get()
-      names_list.append(name)
-      self.quiz_frame.destroy()
-      Selection(root)
 
+      if str.isalpha(name) == True and int(len(name)) <= 10: 
+        names_list.append(name)
+        self.quiz_frame.destroy()
+        Selection(root)
+      else:
+         self.error_label.configure(text = "")
+         self.error_label.configure(text = "We only accept names in the alphabet and under 10 letters!")
+    
+
+
+     
 class Selection: # Class for the quiz selection interface
   def __init__(self, parent): 
     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
