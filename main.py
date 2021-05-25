@@ -32,7 +32,7 @@ class QuizStarter: # Class for the UI, the main menu and username
         self.continue_button.config(width = 8) # button same size as the exit button
 
         #Exit button 
-        self.exit_button = Button(self.quiz_frame, text="Exit", font=("Helvetica", "13", "bold"), bg="indianred")
+        self.exit_button = Button(self.quiz_frame, text="Exit", font=("Helvetica", "13", "bold"), bg="indianred", command=self.end_screen)
         self.exit_button.grid(row=3, padx=50 ,pady=30, sticky=W)
         self.exit_button.config(width = 8) # make the button the same size as the continue button
 
@@ -50,6 +50,9 @@ class QuizStarter: # Class for the UI, the main menu and username
       else:
          self.error_label.configure(text = "")
          self.error_label.configure(text = "We only accept names in the alphabet and under 15 letters!")
+    
+    def end_screen(self): 
+      root.withdraw()
     
 
 
