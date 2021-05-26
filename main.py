@@ -6,6 +6,7 @@ names_list = []
 
 class QuizStarter: # Class for the UI, the main menu and username 
     def __init__(self, parent):
+        
         # background_color = "gray13" 
         # foreground_color = "floralwhite"
         # Frame of the UI
@@ -25,6 +26,7 @@ class QuizStarter: # Class for the UI, the main menu and username
         #entry box
         self.entry_box=Entry(self.quiz_frame)
         self.entry_box.grid(row=2,padx=100, pady=20)
+        self.entry_box.configure(width=30)
       
         #continue button
         self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"), bg="mediumseagreen", command=self.continue_process)
@@ -42,7 +44,6 @@ class QuizStarter: # Class for the UI, the main menu and username
    
     def continue_process(self): 
       name = self.entry_box.get()
-
       if str.isalpha(name) == True and int(len(name)) <= 15: 
         names_list.append(name)
         self.quiz_frame.destroy()
@@ -54,9 +55,6 @@ class QuizStarter: # Class for the UI, the main menu and username
     def end_screen(self): 
       root.withdraw()
     
-
-
-     
 class Selection: # Class for the quiz selection interface
   def __init__(self, parent): 
     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
@@ -66,8 +64,14 @@ class Selection: # Class for the quiz selection interface
     self.heading_label = Label(self.quiz_frame, text="test", bg=background_color, fg=foreground_color)
     self.heading_label.grid(row=0, pady=20, padx=100)
 
+    self.CS_button = Button(self.quiz_frame, text="Computer Science", bg=foreground_color, fg=background_color)
+    self.CS_button.grid(row=1, padx=50, pady=30, sticky=W)
 
-                  
+    self.PHY_button = Button(self.quiz_frame, text="Physics", bg=foreground_color, fg=background_color)
+    self.PHY_button.grid(row=1, padx=50, pady=30, sticky=E)
+
+
+
 if __name__ == "__main__":
   root = Tk()
   root.title("NCEA Study buddy")
