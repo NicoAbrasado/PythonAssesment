@@ -5,8 +5,7 @@ foreground_color = "floralwhite"
 names_list = [] 
 
 class QuizStarter: # Class for the UI, the main menu and username 
-    def __init__(self, parent):
-        
+    def __init__(self, parent):    
         # background_color = "gray13" 
         # foreground_color = "floralwhite"
         # Frame of the UI
@@ -45,9 +44,9 @@ class QuizStarter: # Class for the UI, the main menu and username
     def continue_process(self): 
       name = self.entry_box.get()
       if str.isalpha(name) == True and int(len(name)) <= 15: 
-        names_list.append(name)
-        self.quiz_frame.destroy()
-        Selection(root)
+          names_list.append(name)
+          self.quiz_frame.destroy()
+          Selection(root)
       else:
          self.error_label.configure(text = "")
          self.error_label.configure(text = "We only accept names in the alphabet and under 15 letters!")
@@ -57,18 +56,19 @@ class QuizStarter: # Class for the UI, the main menu and username
     
 class Selection: # Class for the quiz selection interface
   def __init__(self, parent): 
-    self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
-    # Geometry and placement of the UI
-    self.quiz_frame.grid()
+     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
+     # Geometry and placement of the UI
+     self.quiz_frame.grid()
 
-    self.heading_label = Label(self.quiz_frame, text="test", bg=background_color, fg=foreground_color)
-    self.heading_label.grid(row=0, pady=20, padx=100)
+     self.heading_label = Label(self.quiz_frame, text="test", bg=background_color, fg=foreground_color)
+     self.heading_label.grid(row=0, column = 0, columnspan = 2, pady=20, padx=50)
 
-    self.CS_button = Button(self.quiz_frame, text="Computer Science", bg=foreground_color, fg=background_color)
-    self.CS_button.grid(row=1, padx=50, pady=30, sticky=W)
+     self.CS_button = Button(self.quiz_frame, text="Computer Science", bg=foreground_color, fg=background_color)
+     self.CS_button.grid(row=1, column = 0, padx=50, pady=30)
 
-    self.PHY_button = Button(self.quiz_frame, text="Physics", bg=foreground_color, fg=background_color)
-    self.PHY_button.grid(row=1, padx=50, pady=30, sticky=E)
+
+     self.PHY_button = Button(self.quiz_frame, text="Physics", bg=foreground_color, fg=background_color)
+     self.PHY_button.grid(row=1, column = 1, padx=50, pady=30)
 
 
 
