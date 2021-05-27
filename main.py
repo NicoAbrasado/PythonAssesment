@@ -2,6 +2,7 @@ from tkinter import *
 
 background_color = "gray13"
 foreground_color = "floralwhite"
+btn_color = "mediumseagreen"
 names_list = [] 
 
 class QuizStarter: # Class for the UI, the main menu and username 
@@ -47,6 +48,7 @@ class QuizStarter: # Class for the UI, the main menu and username
           names_list.append(name)
           self.quiz_frame.destroy()
           Selection(root)
+          print(names_list)
       else:
          self.error_label.configure(text = "")
          self.error_label.configure(text = "We only accept names in the alphabet and under 15 letters!")
@@ -63,19 +65,42 @@ class Selection: # Class for the quiz selection interface
      self.heading_label = Label(self.quiz_frame, text="Which Quiz Would you like to do?", font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
      self.heading_label.grid(row=0, column = 0, columnspan = 2, pady=20, padx=50)
 
-     self.CS_button = Radiobutton(self.quiz_frame, text="Computer Science", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, indicator=0)
-     self.CS_button.grid(row=1, column = 0, padx=30, pady=30)
+     self.var1 = IntVar()
+     # Computer Science Radio Button
+     self.CS_button = Radiobutton(self.quiz_frame, text="Computer Science", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color,value=1, variable=self.var1)
+     self.CS_button.grid(row=1, column = 0, padx=15, pady=30)
      self.CS_button.config(width = 17, height = 4)
 
-     self.PHY_button = Radiobutton(self.quiz_frame, text="Physics", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color, indicator=0)
-     self.PHY_button.grid(row=1, column = 1, padx=30, pady=30)
+     # Physics Button
+     self.PHY_button = Radiobutton(self.quiz_frame, text="Physics", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color, value=2, variable=self.var1)
+     self.PHY_button.grid(row=1, column = 1, padx=15, pady=30)
      self.PHY_button.config(width = 17, height = 4)
 
-     self.back_button = Button(self.quiz_frame, text="Back", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color)
+     self.back_button = Button(self.quiz_frame, text="Back", font=("Tw Cen MT", "13", "bold"),  bg="indianred", fg=background_color, command=self.return_func)
      self.back_button.grid(row=2, column = 0, pady=40)
+     self.back_button.configure(width = 8)
 
-     self.back_button = Button(self.quiz_frame, text="Submit", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color)
-     self.back_button.grid(row=2, column = 1, pady=40)
+     self.submit_button = Button(self.quiz_frame, text="Submit", font=("Tw Cen MT", "13", "bold"),  bg=btn_color, fg=background_color, command=self.test_setup)
+     self.submit_button.grid(row=2, column = 1, pady=40)
+     self.submit_button.configure(width = 8)
+
+  def test_setup(self): 
+    quiz_choice = self.var1.get()
+    if quiz_choice == 2: 
+       print("Physics")
+    elif quiz_choice == 1: 
+       print("Computer science")
+    else: 
+       print("Fail")      
+  
+  def return_func(self): 
+    names_list.clear()
+    self.quiz_frame.destroy()
+    QuizStarter(root)
+    print(names_list)
+
+    
+
 
 
 
@@ -85,3 +110,4 @@ if __name__ == "__main__":
   root.title("NCEA Study buddy")
   quiz_instance = QuizStarter(root) #instantiation, making an instance of the class Quiz
   root.mainloop()#so the frame doesnt dissapear
+
