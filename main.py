@@ -60,15 +60,23 @@ class Selection: # Class for the quiz selection interface
      # Geometry and placement of the UI
      self.quiz_frame.grid()
 
-     self.heading_label = Label(self.quiz_frame, text="test", bg=background_color, fg=foreground_color)
+     self.heading_label = Label(self.quiz_frame, text="Which Quiz Would you like to do?", font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
      self.heading_label.grid(row=0, column = 0, columnspan = 2, pady=20, padx=50)
 
-     self.CS_button = Button(self.quiz_frame, text="Computer Science", bg=foreground_color, fg=background_color)
-     self.CS_button.grid(row=1, column = 0, padx=50, pady=30)
+     self.CS_button = Radiobutton(self.quiz_frame, text="Computer Science", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, indicator=0)
+     self.CS_button.grid(row=1, column = 0, padx=30, pady=30)
+     self.CS_button.config(width = 17, height = 4)
 
+     self.PHY_button = Radiobutton(self.quiz_frame, text="Physics", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color, indicator=0)
+     self.PHY_button.grid(row=1, column = 1, padx=30, pady=30)
+     self.PHY_button.config(width = 17, height = 4)
 
-     self.PHY_button = Button(self.quiz_frame, text="Physics", bg=foreground_color, fg=background_color)
-     self.PHY_button.grid(row=1, column = 1, padx=50, pady=30)
+     self.back_button = Button(self.quiz_frame, text="Back", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color)
+     self.back_button.grid(row=2, column = 0, pady=40)
+
+     self.back_button = Button(self.quiz_frame, text="Submit", font=("Tw Cen MT", "13", "bold"),  bg=foreground_color, fg=background_color)
+     self.back_button.grid(row=2, column = 1, pady=40)
+
 
 
 
