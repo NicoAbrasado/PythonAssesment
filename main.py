@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 # Variables
 background_color = "gray13"
@@ -6,10 +7,17 @@ foreground_color = "floralwhite"
 btn_color = "mediumseagreen"
 names_list = [] 
 
+
 # Questions and Answers 
 # Physics 
-
-# Computer Science 
+phy_qanda = {
+  1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,'Mechanics']
+}
+# Computer Science
+# Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category 
+cs_qanda = {
+  1: ['What is python in computer science?','Python is a programming language','Python is a search engine','Python is a type of snake','Python is a famous car brand',1,'Python']
+}
 
 
 class QuizStarter: # Class for the UI, the main menu and username 
@@ -96,14 +104,18 @@ class Selection: # Class for the quiz selection interface
      self.error_show.grid(row=3,column=0,pady=10,columnspan=2)
 
   # Start the questions 
-  def test_setup(self): 
+  def test_setup(self):
+    global chosen_quiz 
     quiz_choice = self.var1.get()
     if quiz_choice == 2: 
-       print("Physics")
+       chosen_quiz = phy_qanda
+       print(chosen_quiz[1][0])
        self.quiz_frame.destroy()
        Quiz(root)
+
     elif quiz_choice == 1: 
-       print("Computer science")
+       chosen_quiz = cs_qanda
+       print(chosen_quiz[1][0])
        self.quiz_frame.destroy()
        Quiz(root)
     else: 
@@ -119,26 +131,16 @@ class Selection: # Class for the quiz selection interface
 
 class Quiz: # Actual quiz 
   def __init__(self, parent):
-     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
-     # Geometry and placement of the UI
-     self.quiz_frame.grid()
+    self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
+    # Geometry and placement of the UI
+    self.quiz_frame.grid()
 
-     self.heading_label = Label(self.quiz_frame, text="test", font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
-     self.heading_label.grid(row=0, pady=20, padx=50)
+    self.question_label = Label(self.quiz_frame, text=chosen_quiz[1][0], font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
+    self.question_label.grid(row=1,padx=10,pady=10)
 
      
-
-
-
-    
-
-
-
-
-
 if __name__ == "__main__":
   root = Tk()
   root.title("NCEA Study buddy")
   quiz_instance = QuizStarter(root) #instantiation, making an instance of the class Quiz
   root.mainloop()#so the frame doesnt dissapear
-
