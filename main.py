@@ -100,8 +100,12 @@ class Selection: # Class for the quiz selection interface
     quiz_choice = self.var1.get()
     if quiz_choice == 2: 
        print("Physics")
+       self.quiz_frame.destroy()
+       Quiz(root)
     elif quiz_choice == 1: 
        print("Computer science")
+       self.quiz_frame.destroy()
+       Quiz(root)
     else: 
        self.error_show.configure(text="")
        self.error_show.configure(text="Please select an option before continuing!")
@@ -112,6 +116,18 @@ class Selection: # Class for the quiz selection interface
     self.quiz_frame.destroy()
     QuizStarter(root)
     print(names_list)
+
+class Quiz: # Actual quiz 
+  def __init__(self, parent):
+     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
+     # Geometry and placement of the UI
+     self.quiz_frame.grid()
+
+     self.heading_label = Label(self.quiz_frame, text="test", font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
+     self.heading_label.grid(row=0, pady=20, padx=50)
+
+     
+
 
 
     
