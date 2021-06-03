@@ -6,17 +6,32 @@ background_color = "gray13"
 foreground_color = "floralwhite"
 btn_color = "mediumseagreen"
 names_list = [] 
+asked = [] 
 
 
 # Questions and Answers 
 # Physics 
 phy_qanda = {
-  1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,'Mechanics']
+  1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,'Mechanics'],
 }
 # Computer Science
 # Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category 
 cs_qanda = {
-  1: ['What is python in computer science?','Python is a programming language','Python is a search engine','Python is a type of snake','Python is a famous car brand',1,'Python']
+  1: ['What is python in computer science?','Python is a programming language','Python is a search engine','Python is a type of snake','Python is a famous car brand',1,'Python'],
+  2: ['What does the heuristic, ‘Match with the real world’ deal with?','Make the user able to edit and change their answers','Use familiar icons and concepts found in the real world','Conventions in programming','Able to show the user the status of the system',2,'Heuristics'],
+  3: ['What is an algorithm?','A version of the windows operating system','A type of programming technique that is similar to a class','A finite ordered sequence of steps to solve a problem','The observation of sequences within a computer program',3,'Algorithms'],
+  4: ['What is the data type for this?: 1.4','Float','Integer','String','Boolean',1,'Python'],
+  5: ['Who made the design heuristics?','Jakob Nielsen','Jacob Nielsen','John Nelson','Rolf Molich',1,'Heuristics'],
+  6: ['When can Algorithms be used?','Only in Python','Any time to design a solution to a problem','When finding an error','Only when repairing computers',2,'Algorithms'],
+  7: ['What does this sign mean in python?: !=','Approximately','If this happens do this','Equal to','Not equal to',4,'Python'],
+  8: ['What is the 9th heuristic?','Aesthetic and Minimalist Design','Recognition Rather than recall','Algorithms and Databases','Diagnose and Recover from errors',4,'Heuristics'],
+  9: ['How do you measure algorithm efficiency in terms of run time and space?','F equations','Small R cubits','Big O Notation','Y5 Rankings',3,'Algorithms'],
+  10: ['What does an If statement do?','Checks if something is true then executes it','Compares 2 values and returns a true or false','While a statement is true, it will loop a indefinitely until it is not','A block of code that only runs if called.',1,'Python'],
+  11: ['What does the Heuristic ‘Diagnose Recover and Errors’ deal with?','Allows access for more efficient processes','Gives the user the freedom to personalise their experience','After making an error, the user will be able to recover easily','Follow already existing conventions',3,'Heuristics'],
+  12: ['What is the worst case for a search and sort algorithm?','O(n)','O(n/2)','F - (QT)','Y5 - 6',1,'Algorithms'],
+  13: ['‘Address = []’ is an example of what in python?','Variable','Integer','Dictionary','List',4,'Python'],
+  14: ['‘Clean, Uncluttered, Visible’ is an example of what heuristic?','Help and Documentation','Flexibility and Efficiency of use','Aesthetic and minimalist design','Consistency and standards',3,'Heuristics'],
+  15: ['What is the best case for a quick sort?','Y4^4','F + (n^6)','n*log(n)','O(f^log(6)',3,'Algorithms']
 }
 
 
@@ -105,8 +120,10 @@ class Selection: # Class for the quiz selection interface
 
   # Start the questions 
   def test_setup(self):
-    global chosen_quiz 
+    global chosen_quiz # Changes depdning on the quiz 
+    global qnum 
     quiz_choice = self.var1.get()
+    
     if quiz_choice == 2: 
        chosen_quiz = phy_qanda
        print(chosen_quiz[1][0])
@@ -136,7 +153,21 @@ class Quiz: # Actual quiz
     self.quiz_frame.grid()
 
     self.question_label = Label(self.quiz_frame, text=chosen_quiz[1][0], font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
-    self.question_label.grid(row=1,padx=10,pady=10)
+    self.question_label.grid(row=1,padx=10,pady=30)
+
+    self.var1 = IntVar()
+
+    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,padx=10,pady=10,variable=self.var1)
+    self.rb1.grid(row=2,sticky=W)
+
+    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,padx=10,pady=10,variable=self.var1)
+    self.rb2.grid(row=3,sticky=W)
+
+    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,padx=10,pady=10,variable=self.var1)
+    self.rb3.grid(row=4,sticky=W)
+
+    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
+    self.rb4.grid(row=5,sticky=W)
 
      
 if __name__ == "__main__":
