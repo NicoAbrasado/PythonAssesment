@@ -21,7 +21,8 @@ def randomiser():
 randomiser()
 
 # Questions and Answers 
-# Physics 
+# Physics
+# Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category 
 phy_qanda = {
   1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,'Mechanics'],
   2: ['Who theorised the existence of electrons?','JJ Thompson','John Dalton','Ernest Rutherford','Issac Newton',1,'Nuclear Physics'],
@@ -94,7 +95,8 @@ class QuizStarter: # Class for the UI, the main menu and username
         #Error correction
         self.error_label = Label(self.quiz_frame, text="", font=("Tw Cen MT", "10", "bold"), bg=background_color, fg="indianred")
         self.error_label.grid(row=4,padx=20,pady=10)
-   
+
+   # Method for clicking the continue butoon 
     def continue_process(self): 
       name = self.entry_box.get()
       if str.isalpha(name) == True and int(len(name)) <= 15: 
@@ -105,7 +107,7 @@ class QuizStarter: # Class for the UI, the main menu and username
       else:
          self.error_label.configure(text = "")
          self.error_label.configure(text = "We only accept names in the alphabet and under 15 letters!")
-    
+    # Code for closing the program 
     def end_screen(self): 
       root.withdraw()
     
@@ -146,7 +148,6 @@ class Selection: # Class for the quiz selection interface
   # Start the questions 
   def test_setup(self):
     global chosen_quiz
-    
     quiz_choice = self.var1.get()
     
     if quiz_choice == 2: 
@@ -194,6 +195,45 @@ class Quiz: # Actual quiz
     self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
     self.rb4.grid(row=5,sticky=W)
 
+    self.confirm_button = Button(self.quiz_frame, text='Confrim', font=("Tw Cen MT", "13", "bold"), bg=background_color, fg=foreground_color, command=self.quiz_progress)
+    self.confirm_button.grid(row=6,sticky=E)
+
+    self.error_label = Label(self.quiz_frame, text = '', font=("Tw Cen MT", "13", "bold"), bg=background_color, fg=foreground_color)
+    self.error_label.grid(row=7)
+
+  def questions_setup(self):
+    randomiser()
+    self.var1.set(0)
+    self.question_label.config(text = chosen_quiz[qnum][0])
+    self.rb1.config(text = chosen_quiz[qnum][1])
+    self.rb2.config(text = chosen_quiz[qnum][2])
+    self.rb3.config(text = chosen_quiz[qnum][3])
+    self.rb4.config(text = chosen_quiz[qnum][4])
+  
+  def quiz_progress(self):
+    choice = self.var1.get()
+    if len(asked)>14:
+      if choice == chosen_quiz[qnum][6]:
+        self.confirm_button.config(text='Confirm')
+        print('Finished')
+      else:
+        self.confirm_button.config(text='Confirm')
+        print('Finished')
+    else:
+      if choice == 0:
+        self.error_label.config(text = 'Please select an answer before continuing')
+        choice = self.var1.get()
+      else:
+        if choice == chosen_quiz[qnum][6]:
+          print(chosen_quiz[qnum][6])
+          print('Correct')
+          self.questions_setup()
+        else:
+          print(chosen_quiz[qnum][6])
+          print('Wrong')
+          self.questions_setup()
+        
+        
      
 if __name__ == "__main__":
   root = Tk()
