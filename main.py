@@ -8,11 +8,36 @@ btn_color = "mediumseagreen"
 names_list = [] 
 asked = [] 
 
+def randomiser(): 
+  global qnum 
+
+  qnum = random.randint(1,15)
+
+  if qnum not in asked: 
+    asked.append(qnum)
+  elif qnum in asked: 
+    randomiser()
+
+randomiser()
 
 # Questions and Answers 
 # Physics 
 phy_qanda = {
   1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,'Mechanics'],
+  2: ['Who theorised the existence of electrons?','JJ Thompson','John Dalton','Ernest Rutherford','Issac Newton',1,'Nuclear Physics'],
+  3: ['What are the two different optics in physics?','Light and Sound','Ray and Wave','Dynamic and Mono','Rays and Orbits',2,'Waves'],
+  4: ['What is Newtons first law?','For every action there is an equal and opposire reaction','The amount of acceleration of a body is proportional to the acting force','Gravity acts towards the centre','An object at rest will remain at rest',4,'Mechanics'],
+  5: ['What is the mass of an electron?','1','2','1/1836','1.1836',3,'Nuclear Physics'],
+  6: ['An image is virtual when..','..The rays cross each other','..The rays seem to cross each other','..The image is above the mirror','..The image is in the mirror',2,'Waves'],
+  7: ['How do you calculate centripetal force?','a = V^2/r','F = ma','A = V/t','F = mv^2/r',4,'Mechanics'],
+  8: ['An alpha particle is..','High velocity, but light electrons','Energy from the electromagnetic spectrum','A heavy, slow and positively charged helium nucleus','An ionised particle',3,'Nuclear Physics'],
+  9: ['What is the equation for magnification?','i/O = M','1/i + 1/0 = 1/f = 2/r[f=R/2]','A = V/t','C = 2r',1,'Waves'],
+  10: ['‘For every action there is an equal and opposite reaction’ describes...','Newton’s first law of motion','The Square Cube law','Newton’s fourth law of motion','Newton’s third law of motion',4,'Mechanics'],
+  11: ['What charge is a Beta particle?','Neutral','Positive','All','Negative',4,'Nuclear Physics'],
+  12: ['Wave optics believes that..','..Light is made out of rays','..Light can be split up from rays into waves','..Light is made up of waves','..Light is formed by waves and rays',3,'Waves'],
+  13: ['What forces effected the projectile in it’s motion?','Only Gravity','Gravity and Horozontial force','Gravity and Light','Nothing, it is only directed by the force exerted',1,'Mechanics'],
+  14: ['What is half-life in physics?','Half life is a popular video game franchise','The time it takes for the number of undecayed nuclei to fall to half its original number','The time it takes for decayed nuclei to regenerate','The half point for an organisim',2,'Nuclear Physics'],
+  15: ['What is refraction?','The angle when a ray hits a reflective surface','When a light ray goes from one medium to another','The act of light travelling through space in waves','Light creating an image off of a reflective surface',2,'Waves']
 }
 # Computer Science
 # Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category 
@@ -120,8 +145,8 @@ class Selection: # Class for the quiz selection interface
 
   # Start the questions 
   def test_setup(self):
-    global chosen_quiz # Changes depdning on the quiz 
-    global qnum 
+    global chosen_quiz
+    
     quiz_choice = self.var1.get()
     
     if quiz_choice == 2: 
@@ -152,21 +177,21 @@ class Quiz: # Actual quiz
     # Geometry and placement of the UI
     self.quiz_frame.grid()
 
-    self.question_label = Label(self.quiz_frame, text=chosen_quiz[1][0], font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
+    self.question_label = Label(self.quiz_frame, text=chosen_quiz[qnum][0], font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
     self.question_label.grid(row=1,padx=10,pady=30)
 
     self.var1 = IntVar()
 
-    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,padx=10,pady=10,variable=self.var1)
+    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,padx=10,pady=10,variable=self.var1)
     self.rb1.grid(row=2,sticky=W)
 
-    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,padx=10,pady=10,variable=self.var1)
+    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,padx=10,pady=10,variable=self.var1)
     self.rb2.grid(row=3,sticky=W)
 
-    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,padx=10,pady=10,variable=self.var1)
+    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,padx=10,pady=10,variable=self.var1)
     self.rb3.grid(row=4,sticky=W)
 
-    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[1][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
+    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
     self.rb4.grid(row=5,sticky=W)
 
      
