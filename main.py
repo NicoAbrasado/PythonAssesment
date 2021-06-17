@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import random
 
 # Variables
@@ -8,6 +9,8 @@ btn_color = "mediumseagreen"
 names_list = [] 
 asked = []
 
+question_num = 1
+
 mechanics_score = 0 
 nuclear_physics_score = 0
 waves_score = 0
@@ -16,8 +19,8 @@ python_score = 0
 heuristics_score = 0
 algorithims_score = 0 
 
-physics_categories = [mechanics_score,nuclear_physics_score,waves_score]
-cs_categories = [python_score,heuristics_score,algorithims_score]
+#physics_categories = [mechanics_score,nuclear_physics_score,waves_score]
+#cs_categories = [python_score,heuristics_score,algorithims_score]
 
 
 
@@ -191,7 +194,7 @@ class Quiz: # Actual quiz
     # Geometry and placement of the UI
     self.quiz_frame.grid()
 
-    self.question_label = Label(self.quiz_frame, text=chosen_quiz[qnum][0], font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
+    self.question_label = Label(self.quiz_frame, text=(str(question_num) + '/15) ' + chosen_quiz[qnum][0]), font=("Tw Cen MT", "17", "bold"), bg=background_color, fg=foreground_color)
     self.question_label.grid(row=1,padx=10,pady=30)
 
     self.var1 = IntVar()
@@ -211,17 +214,38 @@ class Quiz: # Actual quiz
     self.confirm_button = Button(self.quiz_frame, text='Confrim', font=("Tw Cen MT", "13", "bold"), bg=background_color, fg=foreground_color, command=self.quiz_progress)
     self.confirm_button.grid(row=6,sticky=E)
 
+    self.back_button = Button(self.quiz_frame, text='Back',font=("Tw Cen MT", '13', 'bold'), bg=background_color, fg=foreground_color, command=self.exit_quiz)
+    self.back_button.grid(row=6, sticky=W)
+
     self.error_label = Label(self.quiz_frame, text = '', font=("Tw Cen MT", "13", "bold"), bg=background_color, fg=foreground_color)
     self.error_label.grid(row=7)
 
+    self.change_num = 1
+
+
+
+  def exit_quiz(self):
+    msg_box = messagebox.askokcancel(title='Are you sure?', message='Are you sure you want to coninue? This will revert you back to the quiz selection')
+    if msg_box == True:
+      asked.clear()
+      self.quiz_frame.destroy()
+      Selection(root)
+      asked.clear()
+      
+    
+    
+  
   def questions_setup(self):
     randomiser()
+    self.change_num +=1
+    print(self.change_num)
     self.var1.set(0)
-    self.question_label.config(text = chosen_quiz[qnum][0])
+    self.question_label.config(text = str(self.change_num)+ '/15) ' +chosen_quiz[qnum][0])
     self.rb1.config(text = chosen_quiz[qnum][1])
     self.rb2.config(text = chosen_quiz[qnum][2])
     self.rb3.config(text = chosen_quiz[qnum][3])
     self.rb4.config(text = chosen_quiz[qnum][4])
+    self.error_label.config(text = '')
   
   def quiz_progress(self):
     global mechanics_score
@@ -236,14 +260,9 @@ class Quiz: # Actual quiz
       if choice == chosen_quiz[qnum][5]: # Correct 
         self.confirm_button.config(text='Confirm')
         score += 1
-    
-        for i in physics_categories:
-          print(i)
         print('Finished')
       else: # Wrong 
         self.confirm_button.config(text='Confirm')
-        for i in physics_categories:
-          print(i)
         print('Finished')
     else: # If it isn't the final question 
       if choice == 0: # If the person hasn't selected anything 
