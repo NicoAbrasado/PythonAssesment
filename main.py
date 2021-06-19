@@ -56,6 +56,7 @@ phy_qanda = {
   13: ['What forces effected the projectile in it’s motion?','Only Gravity','Gravity and Horozontial force','Gravity and Light','Nothing, it is only directed by the force exerted',1,mechanics_score,'Mechanics'],
   14: ['What is half-life in physics?','Half life is a popular video game franchise','The time it takes for the number of undecayed nuclei to fall to half its original number','The time it takes for decayed nuclei to regenerate','The half point for an organisim',2,nuclear_physics_score,'Nuclear Physics'],
   15: ['What is refraction?','The angle when a ray hits a reflective surface','When a light ray goes from one medium to another','The act of light travelling through space in waves','Light creating an image off of a reflective surface',2,waves_score,'Waves']
+  
 }
 # Computer Science
 # Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category
@@ -256,7 +257,7 @@ class Quiz: # Actual quiz
     self.rb2.config(text = chosen_quiz[qnum][2])
     self.rb3.config(text = chosen_quiz[qnum][3])
     self.rb4.config(text = chosen_quiz[qnum][4])
-    if len(asked) == 15:
+    if len(asked) == 14:
         self.confirm_button.config(text='Finish')
 
 
@@ -278,16 +279,14 @@ class Quiz: # Actual quiz
           if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
             if chosen_quiz[qnum][7] == 'Mechanics':
               mechanics_score += 1
-              print(mechanics_score)
             elif chosen_quiz[qnum][7] == 'Waves':
               waves_score += 1
-              print(waves_score)
             else:
               nuclear_physics_score += 1
               print(nuclear_physics_score)
             print('Correct')
             self.quiz_frame.destroy()
-            resultsPage(root)
+            ResultsPage(root)
           else: # Manages the categories for computer science
             if chosen_quiz[qnum][7] == 'Python':
               python_score += 1
@@ -303,12 +302,12 @@ class Quiz: # Actual quiz
               print(heuristics_score)
             print('Correct')
             self.quiz_frame.destroy()
-            resultsPage(root)
+            ResultsPage(root)
         else: # Wrong
           print(chosen_quiz[qnum][5])
           print('Wrong')
           self.quiz_frame.destroy()
-          resultsPage(root)
+          ResultsPage(root)
 
     else: # If it isn't the final question
       if choice == 0: # If the person hasn't selected anything
@@ -351,7 +350,7 @@ class Quiz: # Actual quiz
           print('Wrong')
           self.questions_setup()
 
-class resultsPage:
+class ResultsPage:
     def __init__(self,parent):
         self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
         # Geometry and placement of the UI
@@ -360,24 +359,49 @@ class resultsPage:
         self.user_label = Label(text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
         self.user_label.grid(row=1)
 
-        self.score_label = Label(text = mechanics_score)
-        self.score_label.grid(row = 2, sticky=W)
+        self.show_button = Button(text="Click to show results", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, command=self.calculate_results)
+        self.show_button.grid(row=2)
+        self.show_button.config(width = 17, height = 4)
 
-        self.score_label = Label(text = waves_score)
-        self.score_label.grid(row = 2, sticky=E)
+        self.category1_label = Label(text='')
+        self.category1_label.grid(row=3, sticky=W)
 
-        self.score_label = Label(text = nuclear_physics_score)
-        self.score_label.grid(row = 3, sticky=W)
+        self.category1_score = Label(text='')
+        self.category1_score.grid(row=3, sticky=E)
 
-        self.score_label = Label(text = python_score)
-        self.score_label.grid(row = 3, sticky=E)
+        self.category2_label = Label(text='')
+        self.category2_label.grid(row=4, sticky=W)
 
-        self.score_label = Label(text = algorithms_score)
-        self.score_label.grid(row = 4, sticky=W)
+        self.category2_score = Label(text='')
+        self.category2_score.grid(row=4, sticky=E)
 
-        self.score_label = Label(text = heuristics_score)
-        self.score_label.grid(row = 4, sticky=E)
+        self.category3_label = Label(text='')
+        self.category3_label.grid(row=5, sticky=W)
 
+        self.category3_score = Label(text='')
+        self.category3_score.grid(row=5, sticky=E)
+
+    def calculate_results(self):
+      self.show_button.destroy()
+      if chosen_quiz == phy_qanda:
+        self.category1_label.config(text='Mechanics score: ')
+        self.category1_score.config(text=mechanics_score)
+
+        self.category2_label.config(text='Waves score: ')
+        self.category2_score.config(text=waves_score)
+
+        self.category3_label.config(text='Nuclear Physics score: ')
+        self.category3_score.config(text=nuclear_physics_score)
+
+      else:
+        self.category1_label.config(text='Python score: ')
+        self.category1_score.config(text=python_score)
+
+        self.category2_label.config(text='Algorithms score: ')
+        self.category2_score.config(text=algorithms_score)
+
+        self.category3_label.config(text='Heuristics score: ')
+        self.category3_score.config(text=heuristics_score)
 
 
 if __name__ == "__main__":
