@@ -356,7 +356,8 @@ class resultsPage:
         self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
         # Geometry and placement of the UI
         self.quiz_frame.grid()
-        self.user_label = Label(text="test",bg=background_color,fg=foreground_color)
+
+        self.user_label = Label(text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
         self.user_label.grid(row=1)
 
         self.score_label = Label(text = mechanics_score)
