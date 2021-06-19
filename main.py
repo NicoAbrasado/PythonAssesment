@@ -234,6 +234,7 @@ class Quiz: # Actual quiz
     msg_box = messagebox.askokcancel(title='Are you sure?', message='Are you sure you want to coninue? This will revert you back to the quiz selection')
     if msg_box == True:
       asked.clear()
+      print(asked)
       self.quiz_frame.destroy()
       Selection(root)
       mechanics_score = 0
@@ -352,34 +353,42 @@ class Quiz: # Actual quiz
 
 class ResultsPage:
     def __init__(self,parent):
-        self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
+        self.quiz_frame = Frame(parent, bg='gray13', padx=100, pady=100)
         # Geometry and placement of the UI
         self.quiz_frame.grid()
 
-        self.user_label = Label(text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
-        self.user_label.grid(row=1)
+        self.user_label = Label(self.quiz_frame, text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
+        self.user_label.grid(row=1, pady=10,padx=30)
 
-        self.show_button = Button(text="Click to show results", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, command=self.calculate_results)
-        self.show_button.grid(row=2)
+        self.show_button = Button(self.quiz_frame, text="Calculate Results", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, command=self.calculate_results)
+        self.show_button.grid(row=2, pady=10,padx=30)
         self.show_button.config(width = 17, height = 4)
 
-        self.category1_label = Label(text='')
-        self.category1_label.grid(row=3, sticky=W)
+        self.category1_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category1_label.grid(row=3, sticky=W, pady=10,padx=50)
 
-        self.category1_score = Label(text='')
-        self.category1_score.grid(row=3, sticky=E)
+        self.category1_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category1_score.grid(row=3, sticky=E, pady=10,padx=50)
 
-        self.category2_label = Label(text='')
-        self.category2_label.grid(row=4, sticky=W)
+        self.category2_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category2_label.grid(row=4, sticky=W, pady=10,padx=50)
 
-        self.category2_score = Label(text='')
-        self.category2_score.grid(row=4, sticky=E)
+        self.category2_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category2_score.grid(row=4, sticky=E, pady=10,padx=50)
 
-        self.category3_label = Label(text='')
-        self.category3_label.grid(row=5, sticky=W)
+        self.category3_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category3_label.grid(row=5, sticky=W, pady=10,padx=50)
 
-        self.category3_score = Label(text='')
-        self.category3_score.grid(row=5, sticky=E)
+        self.category3_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
+        self.category3_score.grid(row=5, sticky=E, pady=10,padx=50)
+
+        self.back_button = Button(self.quiz_frame, text='Try again?', font=('Tw Cen MT','13','bold'),bg=btn_color, fg=background_color, command=self.back_function)
+        self.back_button.grid(row=6,sticky=E,pady=10,padx=30)
+
+        self.exit_button = Button(self.quiz_frame, text='Exit quiz', font=('Tw Cen MT','13','bold'),bg='indian red', fg=background_color, command=self.exit_function)
+        self.exit_button.grid(row=6, sticky=W,pady=10,padx=30)
+
+        
 
     def calculate_results(self):
       self.show_button.destroy()
@@ -402,6 +411,27 @@ class ResultsPage:
 
         self.category3_label.config(text='Heuristics score: ')
         self.category3_score.config(text=heuristics_score)
+
+    def back_function(self):
+      self.quiz_frame.destroy()
+      asked.clear()
+      self.quiz_frame.destroy()
+      Selection(root)
+      mechanics_score = 0
+      nuclear_physics_score = 0
+      waves_score = 0
+
+      python_score = 0
+      heuristics_score = 0
+      algorithms_score = 0
+
+      print(asked)
+
+    def exit_function(self):
+      root.withdraw()
+
+      
+
 
 
 if __name__ == "__main__":
