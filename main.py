@@ -264,6 +264,32 @@ class Quiz: # Actual quiz
     if len(asked) == 15:
         self.confirm_button.config(text='Finish')
 
+  def score_allocation(self):
+    global mechanics_score
+    global nuclear_physics_score
+    global waves_score
+    global python_score
+    global heuristics_score
+    global algorithms_score
+    choice = self.var1.get()
+    score = chosen_quiz[qnum][6]
+    if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
+      if chosen_quiz[qnum][7] == 'Mechanics':
+        mechanics_score += 1
+      elif chosen_quiz[qnum][7] == 'Waves':
+        waves_score += 1
+      else:
+        nuclear_physics_score += 1
+        self.quiz_frame.destroy()
+        ResultsPage(root)
+    else: # Manages the categories for computer science
+      if chosen_quiz[qnum][7] == 'Python':
+        python_score += 1
+      elif chosen_quiz[qnum][7] == 'Algorithms':
+        algorithms_score += 1
+      else:
+        heuristics_score += 1
+
 
   def quiz_progress(self):
     global mechanics_score
@@ -281,28 +307,13 @@ class Quiz: # Actual quiz
         choice = self.var1.get()
       else:
         if choice == chosen_quiz[qnum][5]: # Correct
-          if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
-            if chosen_quiz[qnum][7] == 'Mechanics':
-              mechanics_score += 1
-            elif chosen_quiz[qnum][7] == 'Waves':
-              waves_score += 1
-            else:
-              nuclear_physics_score += 1
-            self.quiz_frame.destroy()
-            ResultsPage(root)
-          else: # Manages the categories for computer science
-            if chosen_quiz[qnum][7] == 'Python':
-              python_score += 1
-            elif chosen_quiz[qnum][7] == 'Algorithms':
-              algorithms_score += 1
-            else:
-              heuristics_score += 1
-            self.quiz_frame.destroy()
-            ResultsPage(root)
-        else: # Wrong
+          self.score_allocation()
           self.quiz_frame.destroy()
           ResultsPage(root)
-
+        else: # Wrong
+          self.score_allocation()
+          self.quiz_frame.destroy()
+          ResultsPage(root)
     else: # If it isn't the final question
       print(asked)
       if choice == 0: # If the person hasn't selected anything
@@ -310,22 +321,8 @@ class Quiz: # Actual quiz
         choice = self.var1.get()
       else:
         if choice == chosen_quiz[qnum][5]: # Correct
-          if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
-            if chosen_quiz[qnum][7] == 'Mechanics':
-              mechanics_score += 1
-            elif chosen_quiz[qnum][7] == 'Waves':
-              waves_score += 1
-            else:
-              nuclear_physics_score += 1
-            self.questions_setup()
-          else: # Manages the categories for computer science
-            if chosen_quiz[qnum][7] == 'Python':
-              python_score += 1
-            elif chosen_quiz[qnum][7] == 'Algorithms':
-              algorithms_score += 1
-            else:
-              heuristics_score += 1
-            self.questions_setup()
+          self.score_allocation()
+          self.questions_setup()
         else: # Wrong
           self.questions_setup()
 
