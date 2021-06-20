@@ -29,13 +29,13 @@ def randomiser():
   global qnum
 
   qnum = random.randint(1,15)
+  print(qnum)
 
   if qnum not in asked:
     asked.append(qnum)
   elif qnum in asked:
     randomiser()
 
-randomiser()
 
 # Questions and Answers
 # Physics
@@ -167,6 +167,7 @@ class Selection: # Class for the quiz selection interface
 
   # Start the questions
   def test_setup(self):
+    randomiser()
     global chosen_quiz
     quiz_choice = self.var1.get()
 
@@ -235,8 +236,6 @@ class Quiz: # Actual quiz
     if msg_box == True:
       asked.clear()
       print(asked)
-      self.quiz_frame.destroy()
-      Selection(root)
       mechanics_score = 0
       nuclear_physics_score = 0
       waves_score = 0
@@ -244,11 +243,14 @@ class Quiz: # Actual quiz
       python_score = 0
       heuristics_score = 0
       algorithms_score = 0
+      self.quiz_frame.destroy()
+      Selection(root)
 
 
 
 
   def questions_setup(self):
+    print('here')
     randomiser()
     self.change_num +=1
     print(self.change_num)
@@ -273,6 +275,7 @@ class Quiz: # Actual quiz
     choice = self.var1.get()
     score = chosen_quiz[qnum][6]
     if len(asked)>14: # For the final question
+      print(len(asked))
       if choice == 0: # If the person hasn't selected anything
         self.error_label.config(text = 'Please select an answer before continuing')
         choice = self.var1.get()
@@ -301,6 +304,7 @@ class Quiz: # Actual quiz
           ResultsPage(root)
 
     else: # If it isn't the final question
+      print(asked)
       if choice == 0: # If the person hasn't selected anything
         self.error_label.config(text = 'Please select an answer before continuing')
         choice = self.var1.get()
@@ -396,22 +400,19 @@ class ResultsPage:
         self.category3_score.config(text= str(heuristics_score) + '/5')
 
         self.totalscore_label.config(text='Total Score: ')
-        self.totalscore.config(text = str(python_score+algorithms_score,heuristics_score) + '/15')
+        self.totalscore.config(text = str(python_score+algorithms_score+heuristics_score) + '/15')
         
 
     def back_function(self):
-      self.quiz_frame.destroy()
       asked.clear()
-      self.quiz_frame.destroy()
-      Selection(root)
       mechanics_score = 0
       nuclear_physics_score = 0
       waves_score = 0
-
       python_score = 0
       heuristics_score = 0
       algorithms_score = 0
-
+      self.quiz_frame.destroy()
+      Selection(root)
       print(asked)
 
     def exit_function(self):
