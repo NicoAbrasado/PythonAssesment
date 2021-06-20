@@ -258,7 +258,8 @@ class Quiz: # Actual quiz
     self.rb2.config(text = chosen_quiz[qnum][2])
     self.rb3.config(text = chosen_quiz[qnum][3])
     self.rb4.config(text = chosen_quiz[qnum][4])
-    if len(asked) == 14:
+    self.error_label.config(text = '')
+    if len(asked) == 15:
         self.confirm_button.config(text='Finish')
 
 
@@ -284,29 +285,18 @@ class Quiz: # Actual quiz
               waves_score += 1
             else:
               nuclear_physics_score += 1
-              print(nuclear_physics_score)
-            print('Correct')
             self.quiz_frame.destroy()
             ResultsPage(root)
           else: # Manages the categories for computer science
             if chosen_quiz[qnum][7] == 'Python':
               python_score += 1
-              print('score')
-              print(python_score)
             elif chosen_quiz[qnum][7] == 'Algorithms':
               algorithms_score += 1
-              print('score')
-              print(algorithms_score)
             else:
               heuristics_score += 1
-              print('score')
-              print(heuristics_score)
-            print('Correct')
             self.quiz_frame.destroy()
             ResultsPage(root)
         else: # Wrong
-          print(chosen_quiz[qnum][5])
-          print('Wrong')
           self.quiz_frame.destroy()
           ResultsPage(root)
 
@@ -319,36 +309,20 @@ class Quiz: # Actual quiz
           if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
             if chosen_quiz[qnum][7] == 'Mechanics':
               mechanics_score += 1
-              print('score')
-              print(mechanics_score)
             elif chosen_quiz[qnum][7] == 'Waves':
               waves_score += 1
-              print('score')
-              print(waves_score)
             else:
               nuclear_physics_score += 1
-              print('score')
-              print(nuclear_physics_score)
-            print('Correct')
             self.questions_setup()
           else: # Manages the categories for computer science
             if chosen_quiz[qnum][7] == 'Python':
               python_score += 1
-              print('score')
-              print(python_score)
             elif chosen_quiz[qnum][7] == 'Algorithms':
               algorithms_score += 1
-              print('score')
-              print(algorithms_score)
             else:
               heuristics_score += 1
-              print('score')
-              print(heuristics_score)
-            print('Correct')
             self.questions_setup()
         else: # Wrong
-          print(chosen_quiz[qnum][5])
-          print('Wrong')
           self.questions_setup()
 
 class ResultsPage:
@@ -358,35 +332,41 @@ class ResultsPage:
         self.quiz_frame.grid()
 
         self.user_label = Label(self.quiz_frame, text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
-        self.user_label.grid(row=1, pady=10,padx=30)
+        self.user_label.grid(row=1, pady=10,padx=30, columnspan=2)
 
         self.show_button = Button(self.quiz_frame, text="Calculate Results", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, command=self.calculate_results)
-        self.show_button.grid(row=2, pady=10,padx=30)
+        self.show_button.grid(row=2, pady=10,padx=30, columnspan=2)
         self.show_button.config(width = 17, height = 4)
 
         self.category1_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category1_label.grid(row=3, sticky=W, pady=10,padx=50)
+        self.category1_label.grid(row=3, pady=10,padx=50, column=0)
 
         self.category1_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category1_score.grid(row=3, sticky=E, pady=10,padx=50)
+        self.category1_score.grid(row=3, pady=10,padx=50, column=1)
 
         self.category2_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category2_label.grid(row=4, sticky=W, pady=10,padx=50)
+        self.category2_label.grid(row=4, pady=10,padx=50, column=0)
 
         self.category2_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category2_score.grid(row=4, sticky=E, pady=10,padx=50)
+        self.category2_score.grid(row=4, pady=10,padx=50, column=1)
 
         self.category3_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category3_label.grid(row=5, sticky=W, pady=10,padx=50)
+        self.category3_label.grid(row=5, pady=10,padx=50, column=0)
 
         self.category3_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category3_score.grid(row=5, sticky=E, pady=10,padx=50)
+        self.category3_score.grid(row=5, pady=10,padx=50, column=1)
+
+        self.totalscore_label = Label(self.quiz_frame, text='', font=('Tw Cen MT', '15', 'bold'), bg=background_color, fg=foreground_color)
+        self.totalscore_label.grid(row=6, pady=10, padx=50, column=0)
+
+        self.totalscore = Label(self.quiz_frame, text='', font=('Tw Cen MT', '15', 'bold'), bg=background_color, fg=foreground_color)
+        self.totalscore.grid(row=6, pady=10, padx=50, column=1)
 
         self.back_button = Button(self.quiz_frame, text='Try again?', font=('Tw Cen MT','13','bold'),bg=btn_color, fg=background_color, command=self.back_function)
-        self.back_button.grid(row=6,sticky=E,pady=10,padx=30)
+        self.back_button.grid(row=7,pady=10,padx=30, column=0)
 
         self.exit_button = Button(self.quiz_frame, text='Exit quiz', font=('Tw Cen MT','13','bold'),bg='indian red', fg=background_color, command=self.exit_function)
-        self.exit_button.grid(row=6, sticky=W,pady=10,padx=30)
+        self.exit_button.grid(row=7,pady=10,padx=30, column=1)
 
         
 
@@ -394,23 +374,30 @@ class ResultsPage:
       self.show_button.destroy()
       if chosen_quiz == phy_qanda:
         self.category1_label.config(text='Mechanics score: ')
-        self.category1_score.config(text=mechanics_score)
+        self.category1_score.config(text=str(mechanics_score) + '/5')
 
         self.category2_label.config(text='Waves score: ')
-        self.category2_score.config(text=waves_score)
+        self.category2_score.config(text=str(waves_score) + '/5')
 
         self.category3_label.config(text='Nuclear Physics score: ')
-        self.category3_score.config(text=nuclear_physics_score)
+        self.category3_score.config(text=str(nuclear_physics_score) + '/5')
+
+        self.totalscore_label.config(text='Total Score: ')
+        self.totalscore.config(text=str(nuclear_physics_score+waves_score+mechanics_score) + '/15')
 
       else:
         self.category1_label.config(text='Python score: ')
-        self.category1_score.config(text=python_score)
+        self.category1_score.config(text= str(python_score) + '/5')
 
         self.category2_label.config(text='Algorithms score: ')
-        self.category2_score.config(text=algorithms_score)
+        self.category2_score.config(text= str(algorithms_score) + '/5')
 
         self.category3_label.config(text='Heuristics score: ')
-        self.category3_score.config(text=heuristics_score)
+        self.category3_score.config(text= str(heuristics_score) + '/5')
+
+        self.totalscore_label.config(text='Total Score: ')
+        self.totalscore.config(text = str(python_score+algorithms_score,heuristics_score) + '/15')
+        
 
     def back_function(self):
       self.quiz_frame.destroy()
@@ -431,9 +418,6 @@ class ResultsPage:
       root.withdraw()
 
       
-
-
-
 if __name__ == "__main__":
   root = Tk()
   root.title("NCEA Study buddy")
