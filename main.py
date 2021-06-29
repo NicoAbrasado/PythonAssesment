@@ -29,17 +29,18 @@ def randomiser():
   global qnum
 
   qnum = random.randint(1,15)
-  print(qnum)
 
   if qnum not in asked:
     asked.append(qnum)
   elif qnum in asked:
     randomiser()
 
+randomiser()
 
 # Questions and Answers
 # Physics
 # Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category
+
 phy_qanda = {
   1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,mechanics_score,'Mechanics'],
   2: ['Who theorised the existence of electrons?','JJ Thompson','John Dalton','Ernest Rutherford','Issac Newton',1,nuclear_physics_score,'Nuclear Physics'],
@@ -131,6 +132,43 @@ class QuizStarter: # Class for the UI, the main menu and username
 
 class Selection: # Class for the quiz selection interface
   def __init__(self, parent):
+        self.phy_qanda = {
+      1: ['What is Mechanics?', 'The mechanical components of a car', 'an area of physics concerned with the motion of objects','the interactions between particles','A school of physics which concerns itself with waves',2,mechanics_score,'Mechanics'],
+      2: ['Who theorised the existence of electrons?','JJ Thompson','John Dalton','Ernest Rutherford','Issac Newton',1,nuclear_physics_score,'Nuclear Physics'],
+      3: ['What are the two different optics in physics?','Light and Sound','Ray and Wave','Dynamic and Mono','Rays and Orbits',2,waves_score,'Waves'],
+      4: ['What is Newtons first law?','For every action there is an equal and opposire reaction','The amount of acceleration of a body is proportional to the acting force','Gravity acts towards the centre','An object at rest will remain at rest',4,mechanics_score,'Mechanics'],
+      5: ['What is the mass of an electron?','1','2','1/1836','1.1836',3,nuclear_physics_score,'Nuclear Physics'],
+      6: ['An image is virtual when..','..The rays cross each other','..The rays seem to cross each other','..The image is above the mirror','..The image is in the mirror',2,waves_score,'Waves'],
+      7: ['How do you calculate centripetal force?','a = V^2/r','F = ma','A = V/t','F = mv^2/r',4,mechanics_score,'Mechanics'],
+      8: ['An alpha particle is..','High velocity, but light electrons','Energy from the electromagnetic spectrum','A heavy, slow and positively charged helium nucleus','An ionised particle',3,nuclear_physics_score,"Nuclear Physics"],
+      9: ['What is the equation for magnification?','i/O = M','1/i + 1/0 = 1/f = 2/r[f=R/2]','A = V/t','C = 2r',1,waves_score, "Waves"],
+      10: ['‘For every action there is an \n equal and opposite reaction’ describes...','Newton’s first law of motion','The Square Cube law','Newton’s fourth law of motion','Newton’s third law of motion',4,mechanics_score, "Mechanics"],
+      11: ['What charge is a Beta particle?','Neutral','Positive','All','Negative',4,nuclear_physics_score,'Nuclear Physics'],
+      12: ['Wave optics believes that..','..Light is made out of rays','..Light can be split up from rays into waves','..Light is made up of waves','..Light is formed by waves and rays',3,waves_score, "Waves"],
+      13: ['What forces effected the projectile in it’s motion?','Only Gravity','Gravity and Horozontial force','Gravity and Light','Nothing, it is only directed by the force exerted',1,mechanics_score,'Mechanics'],
+      14: ['What is half-life in physics?','Half life is a popular video game franchise','The time it takes for the number of undecayed nuclei to fall to half its original number','The time it takes for decayed nuclei to regenerate','The half point for an organisim',2,nuclear_physics_score,'Nuclear Physics'],
+      15: ['What is refraction?','The angle when a ray hits a reflective surface','When a light ray goes from one medium to another','The act of light travelling through space in waves','Light creating an image off of a reflective surface',2,waves_score,'Waves']
+      
+    }
+    # Computer Science
+    # Question number: Question, Answer 1, Answer 2, Answer 3, Answer 4, Correct Answer placement, Category
+    self.cs_qanda = {
+    1: ['What is python in computer science?','Python is a programming language','Python is a search engine','Python is a type of snake','Python is a famous car brand',1,python_score,'Python'],
+    2: ['What does the heuristic, ‘Match with the real world’ deal with?','Make the user able to edit and change their answers','Use familiar icons and concepts found in the real world','Conventions in programming','Able to show the user the status of the system',2,heuristics_score,'Heuristics'],
+    3: ['What is an algorithm?','A version of the windows operating system','A type of programming technique that is similar to a class','A finite ordered sequence of steps to solve a problem','The observation of sequences within a computer program',3,algorithms_score,'Algorithms'],
+    4: ['What is the data type for this?: 1.4','Float','Integer','String','Boolean',1,python_score,'Python'],
+    5: ['Who made the design heuristics?','Jakob Nielsen','Jacob Nielsen','John Nelson','Rolf Molich',1,heuristics_score,'Heuristics'],
+    6: ['When can Algorithms be used?','Only in Python','Any time to design a solution to a problem','When finding an error','Only when repairing computers',2,algorithms_score,'Algorithms'],
+    7: ['What does this sign mean in python?: !=','Approximately','If this happens do this','Equal to','Not equal to',4,python_score,'Python'],
+    8: ['What is the 9th heuristic?','Aesthetic and Minimalist Design','Recognition Rather than recall','Algorithms and Databases','Diagnose and Recover from errors',4,heuristics_score,'Heuristics'],
+    9: ['How do you measure algorithm efficiency \n in terms of run time and space?','F equations','Small R cubits','Big O Notation','Y5 Rankings',3,algorithms_score,'Algorithms'],
+    10: ['What does an If statement do?','Checks if something is true then executes it','Compares 2 values and returns a true or false','While a statement is true, it will loop a indefinitely until it is not','A block of code that only runs if called.',1,python_score,'Python'],
+    11: ['What does the Heuristic ‘Diagnose Recover and Errors’ deal with?','Allows access for more efficient processes','Gives the user the freedom to personalise their experience','After making an error, the user will be able to recover easily','Follow already existing conventions',3,heuristics_score,'Heuristics'],
+    12: ['What is the worst case for a search and sort algorithm?','O(n)','O(n/2)','F - (QT)','Y5 - 6',1,algorithms_score,'Algorithms'],
+    13: ['‘Address = []’ is an example of what in python?','Variable','Integer','Dictionary','List',4,python_score,'Python'],
+    14: ['‘Clean, Uncluttered, Visible’ is an example of what heuristic?','Help and Documentation','Flexibility and Efficiency of use','Aesthetic and minimalist design','Consistency and standards',3,heuristics_score,'Heuristics'],
+    15: ['What is the best case for a quick sort?','Y4^4','F + (n^6)','n*log(n)','O(f^log(6)',3,algorithms_score,'Algorithms']
+    }  
      self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
      # Geometry and placement of the UI
      self.quiz_frame.grid()
@@ -167,18 +205,17 @@ class Selection: # Class for the quiz selection interface
 
   # Start the questions
   def test_setup(self):
-    randomiser()
     global chosen_quiz
     quiz_choice = self.var1.get()
 
     if quiz_choice == 2:
-       chosen_quiz = phy_qanda
+       chosen_quiz = self.phy_qanda
        print(chosen_quiz[1][0])
        self.quiz_frame.destroy()
        Quiz(root)
 
     elif quiz_choice == 1:
-       chosen_quiz = cs_qanda
+       chosen_quiz = self.cs_qanda
        print(chosen_quiz[1][0])
        self.quiz_frame.destroy()
        Quiz(root)
@@ -194,7 +231,7 @@ class Selection: # Class for the quiz selection interface
     print(names_list)
 
 class Quiz: # Actual quiz
-  def __init__(self, parent):
+  def __init__(self, parent):           
     self.quiz_frame = Frame(parent, bg=background_color, padx=100, pady=100)
     # Geometry and placement of the UI
     self.quiz_frame.grid()
@@ -204,17 +241,17 @@ class Quiz: # Actual quiz
 
     self.var1 = IntVar()
 
-    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,padx=10,pady=10,variable=self.var1)
-    self.rb1.grid(row=2,sticky=W)
+    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,relief='raised',anchor="w", justify=LEFT, width=70,variable=self.var1)
+    self.rb1.grid(row=2,sticky=W, ipady=10, pady=5)
 
-    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,padx=10,pady=10,variable=self.var1)
-    self.rb2.grid(row=3,sticky=W)
+    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,relief='raised',anchor="w", justify=LEFT, width=70,variable=self.var1)
+    self.rb2.grid(row=3,sticky=W, ipady=10, pady=5)
 
-    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,padx=10,pady=10,variable=self.var1)
-    self.rb3.grid(row=4,sticky=W)
+    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,relief='raised',anchor='w', justify=LEFT, width=70,variable=self.var1)
+    self.rb3.grid(row=4,sticky=W, ipady=10, pady=5)
 
-    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
-    self.rb4.grid(row=5,sticky=W)
+    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,relief='raised',anchor='w', justify=LEFT, width=70,variable=self.var1)
+    self.rb4.grid(row=5,sticky=W, ipady=10, pady=5)
 
     self.confirm_button = Button(self.quiz_frame, text='Confrim', font=("Tw Cen MT", "13", "bold"), bg=btn_color, fg=background_color, command=self.quiz_progress)
     self.confirm_button.grid(row=6,sticky=E, pady=10)
@@ -236,6 +273,8 @@ class Quiz: # Actual quiz
     if msg_box == True:
       asked.clear()
       print(asked)
+      self.quiz_frame.destroy()
+      Selection(root)
       mechanics_score = 0
       nuclear_physics_score = 0
       waves_score = 0
@@ -243,14 +282,8 @@ class Quiz: # Actual quiz
       python_score = 0
       heuristics_score = 0
       algorithms_score = 0
-      self.quiz_frame.destroy()
-      Selection(root)
-
-
-
 
   def questions_setup(self):
-    print('here')
     randomiser()
     self.change_num +=1
     print(self.change_num)
@@ -260,35 +293,8 @@ class Quiz: # Actual quiz
     self.rb2.config(text = chosen_quiz[qnum][2])
     self.rb3.config(text = chosen_quiz[qnum][3])
     self.rb4.config(text = chosen_quiz[qnum][4])
-    self.error_label.config(text = '')
-    if len(asked) == 15:
+    if len(asked) == 14:
         self.confirm_button.config(text='Finish')
-
-  def score_allocation(self):
-    global mechanics_score
-    global nuclear_physics_score
-    global waves_score
-    global python_score
-    global heuristics_score
-    global algorithms_score
-    choice = self.var1.get()
-    score = chosen_quiz[qnum][6]
-    if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
-      if chosen_quiz[qnum][7] == 'Mechanics':
-        mechanics_score += 1
-      elif chosen_quiz[qnum][7] == 'Waves':
-        waves_score += 1
-      else:
-        nuclear_physics_score += 1
-        self.quiz_frame.destroy()
-        ResultsPage(root)
-    else: # Manages the categories for computer science
-      if chosen_quiz[qnum][7] == 'Python':
-        python_score += 1
-      elif chosen_quiz[qnum][7] == 'Algorithms':
-        algorithms_score += 1
-      else:
-        heuristics_score += 1
 
 
   def quiz_progress(self):
@@ -301,29 +307,83 @@ class Quiz: # Actual quiz
     choice = self.var1.get()
     score = chosen_quiz[qnum][6]
     if len(asked)>14: # For the final question
-      print(len(asked))
       if choice == 0: # If the person hasn't selected anything
         self.error_label.config(text = 'Please select an answer before continuing')
         choice = self.var1.get()
       else:
         if choice == chosen_quiz[qnum][5]: # Correct
-          self.score_allocation()
-          self.quiz_frame.destroy()
-          ResultsPage(root)
+          if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
+            if chosen_quiz[qnum][7] == 'Mechanics':
+              mechanics_score += 1
+            elif chosen_quiz[qnum][7] == 'Waves':
+              waves_score += 1
+            else:
+              nuclear_physics_score += 1
+              print(nuclear_physics_score)
+            print('Correct')
+            self.quiz_frame.destroy()
+            ResultsPage(root)
+          else: # Manages the categories for computer science
+            if chosen_quiz[qnum][7] == 'Python':
+              python_score += 1
+              print('score')
+              print(python_score)
+            elif chosen_quiz[qnum][7] == 'Algorithms':
+              algorithms_score += 1
+              print('score')
+              print(algorithms_score)
+            else:
+              heuristics_score += 1
+              print('score')
+              print(heuristics_score)
+            print('Correct')
+            self.quiz_frame.destroy()
+            ResultsPage(root)
         else: # Wrong
-          self.score_allocation()
+          print(chosen_quiz[qnum][5])
+          print('Wrong')
           self.quiz_frame.destroy()
           ResultsPage(root)
+
     else: # If it isn't the final question
-      print(asked)
       if choice == 0: # If the person hasn't selected anything
         self.error_label.config(text = 'Please select an answer before continuing')
         choice = self.var1.get()
       else:
         if choice == chosen_quiz[qnum][5]: # Correct
-          self.score_allocation()
-          self.questions_setup()
+          if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
+            if chosen_quiz[qnum][7] == 'Mechanics':
+              mechanics_score += 1
+              print('score')
+              print(mechanics_score)
+            elif chosen_quiz[qnum][7] == 'Waves':
+              waves_score += 1
+              print('score')
+              print(waves_score)
+            else:
+              nuclear_physics_score += 1
+              print('score')
+              print(nuclear_physics_score)
+            print('Correct')
+            self.questions_setup()
+          else: # Manages the categories for computer science
+            if chosen_quiz[qnum][7] == 'Python':
+              python_score += 1
+              print('score')
+              print(python_score)
+            elif chosen_quiz[qnum][7] == 'Algorithms':
+              algorithms_score += 1
+              print('score')
+              print(algorithms_score)
+            else:
+              heuristics_score += 1
+              print('score')
+              print(heuristics_score)
+            print('Correct')
+            self.questions_setup()
         else: # Wrong
+          print(chosen_quiz[qnum][5])
+          print('Wrong')
           self.questions_setup()
 
 class ResultsPage:
@@ -333,41 +393,35 @@ class ResultsPage:
         self.quiz_frame.grid()
 
         self.user_label = Label(self.quiz_frame, text="Results",font=("Tw Cen MT","20","bold"), bg=background_color,fg=foreground_color)
-        self.user_label.grid(row=1, pady=10,padx=30, columnspan=2)
+        self.user_label.grid(row=1, pady=10,padx=30)
 
         self.show_button = Button(self.quiz_frame, text="Calculate Results", font=("Tw Cen MT", "13", "bold"), bg=foreground_color, fg=background_color, command=self.calculate_results)
-        self.show_button.grid(row=2, pady=10,padx=30, columnspan=2)
+        self.show_button.grid(row=2, pady=10,padx=30)
         self.show_button.config(width = 17, height = 4)
 
         self.category1_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category1_label.grid(row=3, pady=10,padx=50, column=0)
+        self.category1_label.grid(row=3, sticky=W, pady=10,padx=50)
 
         self.category1_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category1_score.grid(row=3, pady=10,padx=50, column=1)
+        self.category1_score.grid(row=3, sticky=E, pady=10,padx=50)
 
         self.category2_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category2_label.grid(row=4, pady=10,padx=50, column=0)
+        self.category2_label.grid(row=4, sticky=W, pady=10,padx=50)
 
         self.category2_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category2_score.grid(row=4, pady=10,padx=50, column=1)
+        self.category2_score.grid(row=4, sticky=E, pady=10,padx=50)
 
         self.category3_label = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category3_label.grid(row=5, pady=10,padx=50, column=0)
+        self.category3_label.grid(row=5, sticky=W, pady=10,padx=50)
 
         self.category3_score = Label(self.quiz_frame, text='',font=('Tw Cen MT', '15','bold'),bg=background_color, fg=foreground_color)
-        self.category3_score.grid(row=5, pady=10,padx=50, column=1)
-
-        self.totalscore_label = Label(self.quiz_frame, text='', font=('Tw Cen MT', '15', 'bold'), bg=background_color, fg=foreground_color)
-        self.totalscore_label.grid(row=6, pady=10, padx=50, column=0)
-
-        self.totalscore = Label(self.quiz_frame, text='', font=('Tw Cen MT', '15', 'bold'), bg=background_color, fg=foreground_color)
-        self.totalscore.grid(row=6, pady=10, padx=50, column=1)
+        self.category3_score.grid(row=5, sticky=E, pady=10,padx=50)
 
         self.back_button = Button(self.quiz_frame, text='Try again?', font=('Tw Cen MT','13','bold'),bg=btn_color, fg=background_color, command=self.back_function)
-        self.back_button.grid(row=7,pady=10,padx=30, column=0)
+        self.back_button.grid(row=6,sticky=E,pady=10,padx=30)
 
         self.exit_button = Button(self.quiz_frame, text='Exit quiz', font=('Tw Cen MT','13','bold'),bg='indian red', fg=background_color, command=self.exit_function)
-        self.exit_button.grid(row=7,pady=10,padx=30, column=1)
+        self.exit_button.grid(row=6, sticky=W,pady=10,padx=30)
 
         
 
@@ -375,47 +429,46 @@ class ResultsPage:
       self.show_button.destroy()
       if chosen_quiz == phy_qanda:
         self.category1_label.config(text='Mechanics score: ')
-        self.category1_score.config(text=str(mechanics_score) + '/5')
+        self.category1_score.config(text=mechanics_score)
 
         self.category2_label.config(text='Waves score: ')
-        self.category2_score.config(text=str(waves_score) + '/5')
+        self.category2_score.config(text=waves_score)
 
         self.category3_label.config(text='Nuclear Physics score: ')
-        self.category3_score.config(text=str(nuclear_physics_score) + '/5')
-
-        self.totalscore_label.config(text='Total Score: ')
-        self.totalscore.config(text=str(nuclear_physics_score+waves_score+mechanics_score) + '/15')
+        self.category3_score.config(text=nuclear_physics_score)
 
       else:
         self.category1_label.config(text='Python score: ')
-        self.category1_score.config(text= str(python_score) + '/5')
+        self.category1_score.config(text=python_score)
 
         self.category2_label.config(text='Algorithms score: ')
-        self.category2_score.config(text= str(algorithms_score) + '/5')
+        self.category2_score.config(text=algorithms_score)
 
         self.category3_label.config(text='Heuristics score: ')
-        self.category3_score.config(text= str(heuristics_score) + '/5')
-
-        self.totalscore_label.config(text='Total Score: ')
-        self.totalscore.config(text = str(python_score+algorithms_score+heuristics_score) + '/15')
-        
+        self.category3_score.config(text=heuristics_score)
 
     def back_function(self):
+      self.quiz_frame.destroy()
       asked.clear()
+      self.quiz_frame.destroy()
+      Selection(root)
       mechanics_score = 0
       nuclear_physics_score = 0
       waves_score = 0
+
       python_score = 0
       heuristics_score = 0
       algorithms_score = 0
-      self.quiz_frame.destroy()
-      Selection(root)
+
       print(asked)
 
     def exit_function(self):
       root.withdraw()
 
       
+
+
+
 if __name__ == "__main__":
   root = Tk()
   root.title("NCEA Study buddy")
