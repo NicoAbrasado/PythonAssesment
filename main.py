@@ -27,10 +27,8 @@ cs_categories = [python_score,heuristics_score,algorithms_score]
 
 def randomiser():
   global qnum
-
   qnum = random.randint(1,15)
   print(qnum)
-
   if qnum not in asked:
     asked.append(qnum)
   elif qnum in asked:
@@ -204,17 +202,19 @@ class Quiz: # Actual quiz
 
     self.var1 = IntVar()
 
-    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,padx=10,pady=10,variable=self.var1)
-    self.rb1.grid(row=2,sticky=W)
+    self.rb1 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][1],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=1,relief='groove', anchor="w", justify=LEFT, width=60, variable=self.var1)
+    self.rb1.grid(row=2,sticky=W,ipady=10)
 
-    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,padx=10,pady=10,variable=self.var1)
-    self.rb2.grid(row=3,sticky=W)
+    self.rb2 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][2],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=2,relief='groove', anchor="w", justify=LEFT, width=60, variable=self.var1)
+    self.rb2.grid(row=3,sticky=W,ipady=10)
 
-    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,padx=10,pady=10,variable=self.var1)
-    self.rb3.grid(row=4,sticky=W)
+    self.rb3 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][3],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=3,relief='groove',  anchor="w", justify=LEFT, width=60, variable=self.var1)
+    self.rb3.grid(row=4,sticky=W,ipady=10)
 
-    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,padx=10,pady=10,variable=self.var1)
-    self.rb4.grid(row=5,sticky=W)
+    self.rb4 = Radiobutton(self.quiz_frame, text=chosen_quiz[qnum][4],font=("Tw Cen MT", "11", "bold"),bg=foreground_color, fg=background_color,value=4,relief='groove',  anchor="w", justify=LEFT, width=60, variable=self.var1)
+    self.rb4.grid(row=5,sticky=W,ipady=10)
+
+    self.change_num = 1
 
     self.confirm_button = Button(self.quiz_frame, text='Confrim', font=("Tw Cen MT", "13", "bold"), bg=btn_color, fg=background_color, command=self.quiz_progress)
     self.confirm_button.grid(row=6,sticky=E, pady=10)
@@ -250,7 +250,6 @@ class Quiz: # Actual quiz
 
 
   def questions_setup(self):
-    print('here')
     randomiser()
     self.change_num +=1
     print(self.change_num)
@@ -272,7 +271,6 @@ class Quiz: # Actual quiz
     global heuristics_score
     global algorithms_score
     choice = self.var1.get()
-    score = chosen_quiz[qnum][6]
     if chosen_quiz == phy_qanda: # Manages the scoring for categories in physics
       if chosen_quiz[qnum][7] == 'Mechanics':
         mechanics_score += 1
@@ -280,8 +278,6 @@ class Quiz: # Actual quiz
         waves_score += 1
       else:
         nuclear_physics_score += 1
-        self.quiz_frame.destroy()
-        ResultsPage(root)
     else: # Manages the categories for computer science
       if chosen_quiz[qnum][7] == 'Python':
         python_score += 1
@@ -292,14 +288,7 @@ class Quiz: # Actual quiz
 
 
   def quiz_progress(self):
-    global mechanics_score
-    global nuclear_physics_score
-    global waves_score
-    global python_score
-    global heuristics_score
-    global algorithms_score
     choice = self.var1.get()
-    score = chosen_quiz[qnum][6]
     if len(asked)>14: # For the final question
       print(len(asked))
       if choice == 0: # If the person hasn't selected anything
